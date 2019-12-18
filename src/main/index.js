@@ -101,6 +101,7 @@ ipcMain.on('minimize', (event) => {
 
 ipcMain.on('close', (event) => {
   if (mainWindow.isVisible()) {
+    console.log(111)
     mainWindow.hide()
   }
 })
