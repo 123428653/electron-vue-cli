@@ -61,7 +61,7 @@
         rgba(255, 255, 255, 1) 40%,
         rgba(229, 229, 229, .9) 100%
       );
-    height: 100vh;
+    height: calc(100vh - 35px);
     padding: 60px 80px;
     width: 100vw;
   }

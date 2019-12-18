@@ -1,7 +1,8 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain, dialog } from 'electron'
-import './menu'
+import { app, BrowserWindow, ipcMain } from 'electron'
+import './menu/application-menu'
+import './native-ui/tray/tray'
 
 /**
  * Set `__static` path to static files in production
@@ -32,6 +33,7 @@ function createWindow () {
     height: 690,
     useContentSize: true,
     resizable: false,
+    frame: isMac,
     webPreferences: {
       nodeIntegration: true
     }
@@ -93,6 +95,16 @@ if (MainVersion > 3) {
 }
 // app.on('ready', createWindow)
 
+ipcMain.on('minimize', (event) => {
+  mainWindow.minimize()
+})
+
+ipcMain.on('close', (event) => {
+  if (mainWindow.isVisible()) {
+    mainWindow.hide()
+  }
+})
+
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
@@ -110,52 +122,6 @@ app.on('activate', () => {
   } else {
     mainWindow.show()
   }
-})
-
-// ipcMain
-ipcMain.on('open-file-dialog', (event) => {
-  dialog.showOpenDialog(mainWindow, {
-    properties: ['openFile', 'openDirectory']
-  }, (files) => {
-    if (files) {
-      event.sender.send('selected-directory', {
-        files
-      })
-    } else {
-      event.sender.send('selected-directory', {
-        files: ''
-      })
-    }
-  })
-})
-
-ipcMain.on('last-open-file-dialog', (event) => {
-  dialog.showOpenDialog(mainWindow, {
-    properties: ['openFile', 'openDirectory']
-  }, (files) => {
-    if (files) {
-      event.sender.send('last-selected-directory', {
-        files
-      })
-    } else {
-      event.sender.send('last-selected-directory', {
-        files: ''
-      })
-    }
-  })
-})
-
-// 添加忽略文件夹
-ipcMain.on('addIgnoreDir', (event) => {
-  dialog.showOpenDialog(mainWindow, {
-    properties: ['openDirectory']
-  }, (files) => {
-    if (files) {
-      event.sender.send('getIgnore', files)
-    } else {
-      event.sender.send('getIgnore', '')
-    }
-  })
 })
 
 /**
