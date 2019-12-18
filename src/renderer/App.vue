@@ -7,11 +7,11 @@
       </div>
       <div class="drag-bar-right">
         <span @click="sendItem('minimize')">
-          <i class="icon-minus">-</i>
+          <i class="icon-minus"></i>
         </span>
         <span class="close" @click="sendItem('close')">
-          <i>+</i>
-          <!-- <van-icon name="cross"></van-icon> -->
+          <!-- <i>+</i> -->
+          <van-icon name="cross" />
         </span>
       </div>
     </div>
@@ -38,7 +38,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   /* CSS */
   * {
     padding: 0;
@@ -123,10 +123,28 @@
     display: flex;
     align-items: center;
     transition: all .2s;
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     width: 35px;
     justify-content: center;
     -webkit-app-region: no-drag;
+    i {
+      transition: all .2s;
+    }
+    &:hover{
+      background-color: #e5e5e5;
+    }
+    &.close:hover{
+      background-color: #e81123;
+      i {
+        color: #fff;
+      }
+    }
+    .icon-minus {
+      display: inline-block;
+      width: 12px;
+      height: 2px;
+      background: #666;
+    }
   }
 </style>
