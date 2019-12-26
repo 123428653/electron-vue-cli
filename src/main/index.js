@@ -35,7 +35,8 @@ function createWindow () {
     resizable: false,
     frame: isMac,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
 
@@ -101,7 +102,6 @@ ipcMain.on('minimize', (event) => {
 
 ipcMain.on('close', (event) => {
   if (mainWindow.isVisible()) {
-    console.log(111)
     mainWindow.hide()
   }
 })

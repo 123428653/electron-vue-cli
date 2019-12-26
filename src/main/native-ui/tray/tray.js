@@ -13,7 +13,6 @@ let trayIcon = null
 let win = null
 const getWin = () => {
   BrowserWindow.getAllWindows().forEach(_win => {
-    console.log(_win.id)
     if (_win.id) {
       win = _win
     }

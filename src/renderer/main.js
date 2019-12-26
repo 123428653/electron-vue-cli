@@ -9,6 +9,7 @@ import {
   Icon,
   Overlay
 } from 'vant'
+import '@/assets/sass/base.scss'
 
 Vue.use(Button)
 Vue.use(Icon)
