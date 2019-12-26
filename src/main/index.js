@@ -2,7 +2,7 @@
 
 import { app, BrowserWindow, ipcMain } from 'electron'
 import './menu/application-menu'
-import './native-ui/tray/tray'
+import './tray/tray'
 
 /**
  * Set `__static` path to static files in production
@@ -33,7 +33,8 @@ function createWindow () {
     height: 690,
     useContentSize: true,
     resizable: false,
-    frame: isMac,
+    frame: false,
+    titleBarStyle: 'hidden',
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <top-bar />
-    <router-view></router-view>
+    <router-view :class="{mac: isMac}"></router-view>
   </div>
 </template>
 
@@ -10,6 +10,11 @@
   import topBar from '@/components/common/topBar'
   export default {
     name: 'Compare',
+    data () {
+      return {
+        isMac: process.platform === 'darwin'
+      }
+    },
     components: {
       topBar
     },
